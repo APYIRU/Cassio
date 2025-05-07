@@ -1,0 +1,236 @@
+Main:
+
+package com.mycompany.matta;
+
+public class Matta {
+
+    public static void main(String[] args) {
+        System.out.println("Hello World!");
+        Autor a1 = new Autor("Daniel", "DAN");
+        a1.adicionarContato("Email", "Daniel@gmail.com");
+        a1.imprimirAutor();
+        Editora e1 = new Editora("Hasz","Rolfa@gmail.com");
+        Livro l1 = new Livro("O rei", 2025, a1, e1);
+        l1.imprimirLivro();
+    }
+}
+
+Contato:
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package com.mycompany.matta;
+
+/**
+ *
+ * @author alunolab08
+ */
+public class Contato {
+    private String tipo;
+    private String contato;
+    
+    public Contato (String tipo, String contato){
+        this.tipo = tipo;
+        this.contato = contato;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public String getContato() {
+        return contato;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public void setContato(String contato) {
+        this.contato = contato;
+    }
+    
+    
+    
+    @Override
+    public String toString(){
+        return "Contato: Tipo = " + tipo + " Contato = " + contato;
+    }
+    
+}
+Editora:
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package com.mycompany.matta;
+
+/**
+ *
+ * @author alunolab08
+ */
+public class Editora {
+    private String nome;
+    private String email;
+    
+    public Editora (String nome, String email){
+        this.nome = nome;
+        this.email = email;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    
+   @Override
+   public String toString(){
+       return " Editora: nome =  "+ nome+ " email = "+ email;
+   }
+}
+
+Autor:
+package com.mycompany.matta;
+
+import java.util.List;
+import java.util.ArrayList;
+
+public class Autor {
+    private String nome;
+    private String abreviatura;
+    private Contato contato;
+    List<Contato> contatos;
+    
+    
+    public Autor (String nome, String abreviatura){
+        this.nome = nome;
+        this.abreviatura = abreviatura;
+        this.contatos = new ArrayList<>();
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public String getAbreviatura() {
+        return abreviatura;
+    }
+
+    public Contato getContato() {
+        return contato;
+    }
+
+    public List<Contato> getContatos() {
+        return contatos;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setAbreviatura(String abreviatura) {
+        this.abreviatura = abreviatura;
+    }
+
+    public void setContato(Contato contato) {
+        this.contato = contato;
+    }
+
+    public void setContatos(List<Contato> contatos) {
+        this.contatos = contatos;
+    }
+    
+    
+    
+    public void adicionarContato(String tipo, String contato){
+        Contato c1 = new Contato(tipo, contato);
+        contatos.add(c1);
+    }
+    
+    public void imprimirAutor(){
+        System.out.println("Autor: nome = " + nome + " Abreviatura = " + abreviatura + contatos);
+    }
+}
+
+Livro:
+
+package com.mycompany.matta;
+
+import java.util.List;
+import java.util.ArrayList;
+
+public class Livro {
+    private String titulo;
+    private int anoPubli;
+    List<Autor> autores;
+    private Autor autor;
+    private Editora editora;
+    
+    public Livro (String titulo, int anoPubli, Autor autor, Editora editora){
+        this.titulo = titulo;
+        this.anoPubli = anoPubli;
+        this.autores = new ArrayList<>();
+        this.editora = editora;
+        this.autor = autor;
+    }
+    
+    public void adicionarAutor(Autor a){
+        autores.add(a);
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public void setAnoPubli(int anoPubli) {
+        this.anoPubli = anoPubli;
+    }
+
+    public void setAutores(List<Autor> autores) {
+        this.autores = autores;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public int getAnoPubli() {
+        return anoPubli;
+    }
+
+    public List<Autor> getAutores() {
+        return autores;
+    }
+
+    public Autor getAutor() {
+        return autor;
+    }
+
+    public Editora getEditora() {
+        return editora;
+    }
+
+    public void setAutor(Autor autor) {
+        this.autor = autor;
+    }
+
+    public void setEditora(Editora editora) {
+        this.editora = editora;
+    }
+    
+    public void imprimirLivro(){
+        System.out.println("Livro: Titulo = "+ titulo+" ano de publi = "+ anoPubli+ editora + " Autor = " + autor);
+    }
+}
