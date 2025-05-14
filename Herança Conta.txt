@@ -1,0 +1,143 @@
+Main:
+
+package com.mycompany.hans;
+
+public class Hans {
+
+    public static void main(String[] args) {
+        System.out.println("Hello World!");
+        Cliente cl1 = new Cliente("Hanz", "234");
+        cl1.criarConta(2,1000);
+        System.out.println(cl1.contas); 
+        cl1.contas.get(0).sacar(500);
+        System.out.println(cl1.contas);
+    }
+}
+
+Cliente:
+package com.mycompany.hans;
+
+import java.util.List;
+import java.util.ArrayList;
+
+public class Cliente {
+    private String nome;
+    private String cpf;
+    List<Conta> contas;
+    
+    public Cliente (String nome, String cpf){
+        this.nome = nome;
+        this.cpf = cpf;
+        this.contas = new ArrayList<>();
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+    
+    public void criarConta(int i, double saldo){
+        if (i == 1){
+            ContaCorrente c1 = new ContaCorrente(saldo);
+            contas.add(c1);
+        } else {
+            ContaPoupança c2 = new ContaPoupança(saldo);
+            contas.add(c2);
+        }
+       
+        
+    }
+    
+}
+Conta:
+
+package com.mycompany.hans;
+
+public class Conta {
+    private double saldo;
+
+    public Conta(double saldo) {
+        this.saldo = saldo;
+    }
+
+    public double getSaldo() {
+        return saldo;
+    }
+
+    public void setSaldo(double saldo) {
+        this.saldo = saldo;
+    }
+    
+    
+    public void sacar(double t){
+        saldo =- t;
+    }
+    
+    public void depositar(double x){
+        saldo =+ x;
+    }
+    
+    public void aplicarRendimento(){
+        
+    }
+}
+
+ContaCorretne:
+
+package com.mycompany.hans;
+
+public class ContaCorrente extends Conta {
+    
+    public ContaCorrente(double saldo){
+        super(saldo);
+    }
+    
+    
+    public void sacar(double t){
+        setSaldo(getSaldo() - t - 5);
+    }
+    
+    public void alplicarRendimento(){
+        setSaldo(getSaldo() * 1.012);
+    }
+    
+    @Override
+    public String toString(){
+        return "Conta Corrente saldo: " + getSaldo();
+    }
+}
+
+Conta Poupança:
+
+package com.mycompany.hans;
+
+
+public class ContaPoupança extends Conta{
+    public ContaPoupança (double saldo){
+        super(saldo);
+    }
+    
+    public void sacar(double t){
+        setSaldo(getSaldo() - t - 15);
+    }
+    
+    public void aplicarRendimento(){
+        setSaldo(getSaldo() * 1.005);
+    }
+    
+    @Override
+    public String toString(){
+        return "Conta Poupança saldo: " + getSaldo();
+    }
+}
