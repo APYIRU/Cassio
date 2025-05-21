@@ -1,0 +1,92 @@
+Main:
+package com.mycompany.abrantes;
+
+public class Abrantes {
+
+    public static void main(String[] args) {
+        System.out.println("Hello World!");
+    }
+}
+Padaria:
+package com.mycompany.abrantes;
+
+import java.util.ArrayList;
+import java.util.List;
+
+
+public class Padaria {
+    private String nome;
+    private String cnpj;
+    List<Pães> pães;
+
+    public Padaria(String nome, String cnpj, List<Pães> pães) {
+        this.nome = nome;
+        this.cnpj = cnpj;
+        this.pães = new ArrayList<>();
+        
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getCnpj() {
+        return cnpj;
+    }
+
+    public void setCnpj(String cnpj) {
+        this.cnpj = cnpj;
+    }
+    
+    public void fazerPão(int i, double tamanho){
+        if (i == 1){
+            PãoBrioche p1 = new PãoBrioche(tamanho);
+            pães.add(p1);
+        } else 
+            if (i == 2){
+                PãoDeSal p2 = new PãoDeSal(tamanho);
+                pães.add(p2)
+            } else {
+                System.out.println("Tem pão nao");
+            }
+                
+                
+    }
+    
+    
+    
+    }
+Paes:
+
+package com.mycompany.abrantes;
+
+public class Pães {
+    private double tamanho;
+
+    public Pães(double tamanho) {
+        this.tamanho = tamanho;
+    }
+
+    public double getTamanho() {
+        return tamanho;
+    }
+
+    public void setTamanho(double tamanho) {
+        this.tamanho = tamanho;
+    }
+
+ 
+    public void adcionarFarinha(double j){
+        setTamanho(getTamanho() + j);
+    }
+    
+    
+    
+    
+}
+PaoDeSal
+PaoBrioche
