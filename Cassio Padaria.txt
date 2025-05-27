@@ -1,0 +1,162 @@
+Exercico: Você deve criar um código em java sobre o sistema de uma padaria.
+O código deve conter as classes Padaria, Paes, PaoDeSal, PaoBrioche.
+Padaria tem nome e cnpj, e Paes tem tamanho.
+As classes PaoDeSal e PaoBrioche herdam da classe paes, e a classe PaoBrioche deve ter uma interface chamada esfarelar.
+Faça os métodos: fazerPao(), adicionarFarinha(), Fermentar(só pode ser usado no pao de sal dobrando seu tamanho), Esfarelar(so acontece com o PaoBrioche e fica com tamanho pela metade)
+
+Main:
+package com.mycompany.abrantes;
+
+public class Abrantes {
+
+    public static void main(String[] args) {
+        System.out.println("Hello World!");
+        Padaria p1 = new Padaria("Davi","123");
+        p1.fazerPão(2, 50);
+        p1.fazerPão(1, 100);
+        p1.pães.get(0).adcionarFarinha(15);
+        System.out.println(p1.pães);
+        p1.pães.get(0).fermentar();
+        System.out.println(p1.pães);
+        
+        for (Paes p : p1.pães){
+            if (p instanceof PãoBrioche){
+                ((PãoBrioche) p).esfarelar();
+            }
+        }
+        System.out.println(p1.pães);
+    }
+}
+
+Padaria:
+package com.mycompany.abrantes;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Padaria {
+    private String nome;
+    private String cnpj;
+    List<Paes> pães;
+
+    public Padaria(String nome, String cnpj) {
+        this.nome = nome;
+        this.cnpj = cnpj;
+        this.pães = new ArrayList<>();
+        
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getCnpj() {
+        return cnpj;
+    }
+
+    public void setCnpj(String cnpj) {
+        this.cnpj = cnpj;
+    }
+    
+    public void fazerPão(int i, double tamanho){
+        if (i == 1){
+            PãoBrioche p1 = new PãoBrioche(tamanho);
+            pães.add(p1);
+        } else 
+            if (i == 2){
+                PãoDeSal p2 = new PãoDeSal(tamanho);
+                pães.add(p2);
+            } else {
+                System.out.println("Tem pão nao");
+            }
+                
+                
+    }
+    @Override
+    public String toString(){
+        return nome + " " + cnpj + " " ;
+    }
+}
+
+Paes:
+package com.mycompany.abrantes;
+
+public abstract class Paes {
+    private double tamanho;
+
+    public Paes(double tamanho) {
+        this.tamanho = tamanho;
+    }
+
+
+    public double getTamanho() {
+        return tamanho;
+    }
+
+    public void setTamanho(double tamanho) {
+        this.tamanho = tamanho;
+    }
+
+ 
+    public void adcionarFarinha(double j){
+        setTamanho(getTamanho() + j);
+    }
+    
+    public abstract void fermentar();
+        
+    
+}
+
+PãoDeSal:
+package com.mycompany.abrantes;
+
+public class PãoDeSal extends Paes {
+
+    public PãoDeSal(double tamanho) {
+        super(tamanho);
+    }
+    
+    public void fermentar(){
+        setTamanho(getTamanho() * 2);
+    }
+    
+    @Override
+    public String toString(){
+        return "Tamano = "+getTamanho();
+    }
+}
+
+PãoBrioche:
+package com.mycompany.abrantes;
+
+public class PãoBrioche extends Paes implements Farelo {
+
+    public PãoBrioche(double tamanho) {
+        super(tamanho);
+    }
+    
+    public void fermentar(){
+        System.out.println("Não tem fermento");
+    }
+    
+    public void esfarelar(){
+        setTamanho(getTamanho()/2);
+    }
+    
+    @Override
+    public String toString(){
+        return "Tamanho = "+ getTamanho();
+    }
+}
+
+Esfarelar:
+package com.mycompany.abrantes;
+
+public interface Farelo {
+    
+    public void esfarelar();
+}
