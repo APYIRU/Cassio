@@ -1,0 +1,144 @@
+﻿public class Main
+{
+        public static void main(String[] args) {
+                System.out.println("Hello World");
+                Tecnico te = new Tecnico("Matta","1");
+                Time t = new Time(te);
+                
+                t.adicionarJogador("Matilda", "2");
+                t.adicionarJogador("Matheus", "3");
+                t.adicionarJogador("Manuela", "4");
+                
+                System.out.println(te);
+                System.out.println(t.jogadores);
+                
+                for (Jogadores j : t.jogadores){
+                    j.validarCpf();
+                    j.jogar();
+                }
+        }
+}
+
+
+import java.util.List;
+import java.util.ArrayList;
+
+
+public class Time {
+    private Tecnico tecnico;
+    List <Jogadores> jogadores;
+    
+    public Time (Tecnico tecnico){
+        this.jogadores = new ArrayList<>();
+    }
+    
+    public void setTecnico(){
+        this.tecnico = tecnico;
+    }
+    
+    public Tecnico getTecnico(){
+        return tecnico;
+    }
+    
+    public void adicionarTecnico(Tecnico tecnico){
+        this.tecnico = tecnico;
+    }
+    
+    public void adicionarJogador(String nome, String cpf){
+        Jogadores j = new Jogadores(nome, cpf);
+        jogadores.add(j);
+    }
+    
+
+
+}
+
+
+
+
+public class Tecnico extends Membro implements Gerencia{
+    
+    public Tecnico(String nome, String cpf){
+        super(nome, cpf);
+    }
+    
+    public void jogar(){
+        System.out.println("Aposentado");
+    }
+    
+    public void organizarTime(){
+        System.out.println("Organizado");
+    }
+    
+    public void treinar(){
+        System.out.println("Treinados");
+    }
+    
+    @Override
+    public String toString(){
+        return getNome() + " " + getCpf();
+    }
+}
+
+
+
+
+public class Jogadores extends Membro {
+    
+    public Jogadores(String nome, String cpf){
+        super(nome, cpf);
+    }
+    
+    public void jogar(){
+        System.out.println("Jogando");
+    }
+    
+    public void validarCpf(){
+        System.out.println("Validado");
+    }
+    
+    @Override
+    public String toString(){
+        return getNome() + " " + getCpf();
+    }
+    
+}
+
+
+
+
+public interface Gerencia{
+    public void organizarTime();
+    public void treinar();
+}
+
+
+
+
+public abstract class Membro{
+    private String nome;
+    private String cpf;
+    
+    public Membro(String nome, String cpf){
+        this.nome = nome;
+        this.cpf = cpf;
+    }
+    
+    public abstract void jogar();
+    
+    public String getNome(){
+        return nome;
+    }
+    
+    public void setNome(String nome){
+        this.nome = nome;
+    }
+    
+    public String getCpf(){
+        return cpf;
+    }
+    
+    public void setCpf(String cpf){
+        this.cpf = cpf;
+    }
+}
